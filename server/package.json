@@ -1,0 +1,24 @@
+{
+  "name": "infinity-community-server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.2",
+    "socket.io": "^4.8.1",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "ioredis": "^5.4.1"
+  }
+}
