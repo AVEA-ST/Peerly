@@ -42,7 +42,12 @@ export default function Chat() {
 
   useEffect(() => {
     const socket = getSocket()
-    socket.emit('conversation:join', conversationId)
+
+    const join = () => socket.emit('conversation:join', conversationId)
+    // Join now, and on every future reconnect
+    join()
+    socket.on('connect', join)
+    socket.on('reconnect', join)
     const onNew = (message) => {
       if (message.conversationId === conversationId) {
         setMsgs(prev => [...prev, message])
@@ -52,6 +57,8 @@ export default function Chat() {
     socket.on('message:new', onNew)
     return () => {
       socket.off('message:new', onNew)
+      socket.off('connect', join)
+      socket.off('reconnect', join)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conversationId])
